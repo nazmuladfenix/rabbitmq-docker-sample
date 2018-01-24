@@ -9,6 +9,7 @@ using RabbitMQ.Domain.Messages;
 using RabbitMQ.Shared;
 using RabbitMQ.Shared.Infrastructure;
 
+
 namespace Consumer.Service
 {
     public class Startup
@@ -26,8 +27,8 @@ namespace Consumer.Service
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = this.Configuration.GetConnectionString("ConnectionString");
-            services.AddEntityFrameworkNpgsql()
-                .AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString, 
+                b => b.MigrationsAssembly("Consumer.Service")));
             services.AddMvc();
             this.ConfigureDependencies(services);
             var sp = services.BuildServiceProvider();

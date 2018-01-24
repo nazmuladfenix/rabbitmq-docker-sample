@@ -11,8 +11,8 @@ using System;
 namespace Consumer.Service.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180124133330_initial_")]
-    partial class initial_
+    [Migration("20180124145124_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace Consumer.Service.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
-            modelBuilder.Entity("RabbitMQ.Domain.Messages.Person", b =>
+            modelBuilder.Entity("Consumer.Service.Person", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();

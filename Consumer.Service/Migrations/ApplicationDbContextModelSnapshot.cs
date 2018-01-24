@@ -20,7 +20,7 @@ namespace Consumer.Service.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
-            modelBuilder.Entity("RabbitMQ.Domain.Messages.Person", b =>
+            modelBuilder.Entity("Consumer.Service.Person", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
