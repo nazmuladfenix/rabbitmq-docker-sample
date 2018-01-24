@@ -1,0 +1,16 @@
+﻿version: "3"
+services:
+    publicationservice:
+        image: publication.service
+        build: .
+        ports:
+            - "8000:80"
+        depends_on:
+            - rabbitmq
+    rabbitmq:
+        image: "rabbitmq:3-management"
+        ports:
+          - "5672:5672"          
+        environment:
+            RABBITMQ_DEFAULT_USER: "nazmul"
+            RABBITMQ_DEFAULT_PASS: "P2qN9MVEv2Gn"
