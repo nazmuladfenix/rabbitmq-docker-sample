@@ -40,7 +40,15 @@ namespace Publication.Service
                 app.UseDeveloperExceptionPage();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.UseMvc();
+            //app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default_route",
+                    template: "{controller}/{action}/{id?}",
+                    defaults: new { controller = "Publication", action = "Get" }
+                );
+            });
         }
     }
 }

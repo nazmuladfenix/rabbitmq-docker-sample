@@ -33,7 +33,15 @@ namespace Consumer.Service
             var sp = services.BuildServiceProvider();
             this._serviceProvider = sp;
             var rabbitReceiver = sp.GetService<IRabbitMQReceiver>();
-            rabbitReceiver.CreateReceiver<Person>(this.HandleMessage, "docker.test.queue", ExchangeType.Direct, "docker.test.exchange");
+
+            try
+            {
+                rabbitReceiver.CreateReceiver<Person>(this.HandleMessage, "docker.test.queue", ExchangeType.Direct, "docker.test.exchange");
+            }
+            catch (Exception e)
+            {
+            }
+
         }
 
         private bool HandleMessage(Person person)
@@ -56,7 +64,18 @@ namespace Consumer.Service
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            app.UseMvc();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            //app.UseMvc();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default_route",
+                    template: "{controller}/{action}/{id?}",
+                    defaults: new { controller = "Person", action = "Get" }
+                );
+            });
         }
     }
 }
