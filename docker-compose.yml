@@ -21,9 +21,9 @@ services:
     image: "postgres"
     restart: unless-stopped
     environment:
-      - "POSTGRES_DB:RabbitConsumer"
-      - "POSTGRES_USER:nazmul"
-      - "POSTGRES_PASSWORD:P2qN9MVEv2Gn"
+      - POSTGRES_DB=RabbitConsumer
+      - POSTGRES_USER=nazmul
+      - POSTGRES_PASSWORD=P2qN9MVEv2Gn
     ports:
       - "5432:5432"
     
