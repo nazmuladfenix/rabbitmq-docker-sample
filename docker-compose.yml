@@ -59,6 +59,9 @@ services:
       - postgres
       - rabbitMQ
 networks:
-  default:
-    external:
-      name: docker_test_default
+  default:  
+    driver: bridge
+    ipam:
+        driver: default
+        config:
+            - subnet: 172.16.0.0/16           

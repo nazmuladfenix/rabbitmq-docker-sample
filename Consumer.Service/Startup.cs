@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
-using RabbitMQ.Domain.Messages;
+using RabbitMQ.Domain.Entities;
 using RabbitMQ.Shared;
 using RabbitMQ.Shared.Infrastructure;
 
@@ -15,6 +15,9 @@ namespace Consumer.Service
 {
     public class Startup
     {
+        private const string QueueName = "docker.test.queue";
+        private const string ExchangeName = "docker.test.exchange";
+
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
@@ -39,7 +42,8 @@ namespace Consumer.Service
             try
             {
                 Thread.Sleep(5000);
-                rabbitReceiver.CreateReceiver<Person>(this.HandleMessage, "docker.test.queue", ExchangeType.Direct, "docker.test.exchange");
+                
+                rabbitReceiver.CreateReceiver<Person>(this.HandleMessage, QueueName, ExchangeType.Direct, ExchangeName);
             }
             catch (Exception e)
             {

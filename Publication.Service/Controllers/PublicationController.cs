@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
-using RabbitMQ.Domain.Messages;
+using RabbitMQ.Domain.Entities;
 using RabbitMQ.Shared.Infrastructure;
 
 namespace Publication.Service.Controllers
