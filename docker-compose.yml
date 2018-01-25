@@ -5,12 +5,7 @@ services:
     image: publication.service
     build:
       context: .
-      dockerfile: Publication.Service/Dockerfile
-    networks:
-      default:
-         ipv4_address: 172.16.0.2
-    extra_hosts:
-      - "rabbitMQ:172.16.0.3"
+      dockerfile: Publication.Service/Dockerfile    
     ports:
       - "8000:80"
     depends_on: 
@@ -19,9 +14,6 @@ services:
   rabbitMQ:
     image: "rabbitmq:3-management" 
     hostname: rabbitDocker
-    networks:
-      default:
-         ipv4_address: 172.16.0.3
     environment:
       - RABBITMQ_DEFAULT_USER=nazmul
       - RABBITMQ_DEFAULT_PASS=P2qN9MVEv2Gn
@@ -32,13 +24,13 @@ services:
   postgres:
     image: "postgres"
     restart: unless-stopped
-    networks:
-      default:
-         ipv4_address: 172.16.0.4
     environment:
-      - POSTGRES_DB=RabbitConsumer
-      - POSTGRES_USER=nazmul
-      - POSTGRES_PASSWORD=P2qN9MVEv2Gn
+      - DB_CONNECTION=pgsql
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=RabbitConsumer
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
     ports:
       - "5432:5432"
     
@@ -46,22 +38,9 @@ services:
     image: consumer.service
     build:
       context: .
-      dockerfile: Consumer.Service/Dockerfile
-    networks:
-      default:
-         ipv4_address: 172.16.0.5
-    extra_hosts:
-      - "postgres:172.16.0.4"
-      - "rabbitMQ:172.16.0.3"    
+      dockerfile: Consumer.Service/Dockerfile      
     ports:
       - "8080:80"
     depends_on:
       - postgres
-      - rabbitMQ
-networks:
-  default:  
-    driver: bridge
-    ipam:
-        driver: default
-        config:
-            - subnet: 172.16.0.0/16           
+      - rabbitMQ        

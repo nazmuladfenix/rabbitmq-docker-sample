@@ -19,7 +19,7 @@
     "Publication.Service": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "api/publication",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
