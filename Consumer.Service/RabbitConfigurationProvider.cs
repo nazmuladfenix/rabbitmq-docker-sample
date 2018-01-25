@@ -16,12 +16,12 @@ namespace Consumer.Service
         {
             return this._configuration ?? (this._configuration = new RabbbitConfiguration
             {
-                HostName = "rabbitMQ",
+                HostName = "172.16.0.3",
                 Port = 5672,
-                //UserName = "nazmul",
-                //Password = "P2qN9MVEv2Gn"
-                UserName = "guest",
-                Password = "guest"
+                UserName = "nazmul",
+                Password = "P2qN9MVEv2Gn"
+                //UserName = "guest",
+                //Password = "guest"
             });
 
         }

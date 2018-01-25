@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +28,7 @@ namespace Consumer.Service
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = this.Configuration.GetConnectionString("ConnectionString");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString, 
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString,
                 b => b.MigrationsAssembly("Consumer.Service")));
             services.AddMvc();
             this.ConfigureDependencies(services);
@@ -37,6 +38,7 @@ namespace Consumer.Service
 
             try
             {
+                Thread.Sleep(5000);
                 rabbitReceiver.CreateReceiver<Person>(this.HandleMessage, "docker.test.queue", ExchangeType.Direct, "docker.test.exchange");
             }
             catch (Exception e)

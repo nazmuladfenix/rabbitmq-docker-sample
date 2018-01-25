@@ -6,13 +6,25 @@ services:
     build:
       context: .
       dockerfile: Publication.Service/Dockerfile
+    networks:
+      default:
+         ipv4_address: 172.16.0.2
+    extra_hosts:
+      - "rabbitMQ:172.16.0.3"
     ports:
       - "8000:80"
     depends_on: 
       - rabbitMQ
 
   rabbitMQ:
-    image: "rabbitmq:3-management"   
+    image: "rabbitmq:3-management" 
+    hostname: rabbitDocker
+    networks:
+      default:
+         ipv4_address: 172.16.0.3
+    environment:
+      - RABBITMQ_DEFAULT_USER=nazmul
+      - RABBITMQ_DEFAULT_PASS=P2qN9MVEv2Gn
     ports:
       - "15672:15672"
       - "5672:5672" 
@@ -20,6 +32,9 @@ services:
   postgres:
     image: "postgres"
     restart: unless-stopped
+    networks:
+      default:
+         ipv4_address: 172.16.0.4
     environment:
       - POSTGRES_DB=RabbitConsumer
       - POSTGRES_USER=nazmul
@@ -32,8 +47,18 @@ services:
     build:
       context: .
       dockerfile: Consumer.Service/Dockerfile
+    networks:
+      default:
+         ipv4_address: 172.16.0.5
+    extra_hosts:
+      - "postgres:172.16.0.4"
+      - "rabbitMQ:172.16.0.3"    
     ports:
       - "8080:80"
     depends_on:
       - postgres
       - rabbitMQ
+networks:
+  default:
+    external:
+      name: docker_test_default
