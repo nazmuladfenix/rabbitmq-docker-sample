@@ -7,7 +7,7 @@ Run the following command to into "rabbitmq-docker-sample" directory
 Create a bridge network 
 
 ```shell
-docker network create --driver=bridge --subnet=192.16.0.0/16 test_network
+docker network create --driver=bridge --subnet=172.16.0.0/16 test_network
 ```
 Build and run the conatiners
 
