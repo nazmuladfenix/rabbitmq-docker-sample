@@ -10,10 +10,11 @@ Create a bridge network
 docker network create --driver=bridge --subnet=192.16.0.0/16 test_network
 ```
 Build and run the conatiners
-'''shell
+
+```shell
 docker-compose build
 docker-compose up
-'''
+```
 
 # Publish data
 
