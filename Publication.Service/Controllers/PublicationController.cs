@@ -38,6 +38,7 @@ namespace Publication.Service.Controllers
         [HttpPost]
         public void Post([FromBody]Person person)
         {
+            Console.WriteLine("==============Got the person to publish============");
             this._rabbitMqPublisher.Publish(person, ExchangeType.Direct, "docker.test.exchange", "docker.test.queue");
         }
 

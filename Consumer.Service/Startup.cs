@@ -41,12 +41,14 @@ namespace Consumer.Service
 
             try
             {
-                Thread.Sleep(5000);
-                
+                Thread.Sleep(15000);
+
                 rabbitReceiver.CreateReceiver<Person>(this.HandleMessage, QueueName, ExchangeType.Direct, ExchangeName);
+                Console.WriteLine("==========Rabbit receiver up=========");
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
             }
 
         }

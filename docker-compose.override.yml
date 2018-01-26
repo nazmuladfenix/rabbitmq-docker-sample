@@ -5,11 +5,11 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
-      - "8000:80"
+      - "80"
 
   consumer.service:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
-      - "8080:80"
+      - "80"
 
