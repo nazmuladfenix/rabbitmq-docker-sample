@@ -55,9 +55,17 @@ namespace Consumer.Service
 
         private bool HandleMessage(Person person)
         {
+            if (person == null)
+            {
+                Console.WriteLine("================Invalid data============");
+                return false;
+            }
+            Console.WriteLine("==========Saving data to DB=========");
+            Console.WriteLine($"Name: {person.Name} Address:{person.Address}");
             var dbContext = this._serviceProvider.GetService<ApplicationDbContext>();
             dbContext.Persons.Add(person);
             dbContext.SaveChanges();
+            Console.WriteLine("==============Data saved=========");
             return true;
         }
 

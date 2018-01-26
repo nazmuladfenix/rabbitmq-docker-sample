@@ -26,32 +26,16 @@ namespace Publication.Service.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-
-        //// GET: api/Publication/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        
 
         // POST: api/Publication
+        [Consumes("application/json")]
         [HttpPost]
         public void Post([FromBody]Person person)
         {
             Console.WriteLine("==============Got the person to publish============");
+            Console.WriteLine($"Name: {person.Name} Address:{person.Address}");
             this._rabbitMqPublisher.Publish(person, ExchangeType.Direct, "docker.test.exchange", "docker.test.queue");
         }
-
-        //// PUT: api/Publication/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }
