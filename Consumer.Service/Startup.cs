@@ -41,7 +41,7 @@ namespace Consumer.Service
 
             try
             {
-                Thread.Sleep(15000);
+                Thread.Sleep(5000);
 
                 rabbitReceiver.CreateReceiver<Person>(this.HandleMessage, QueueName, ExchangeType.Direct, ExchangeName);
                 Console.WriteLine("==========Rabbit receiver up=========");
