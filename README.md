@@ -4,8 +4,16 @@
 
 Run the following command to into "rabbitmq-docker-sample" directory
 
+Create a bridge network 
+
+```shell
+docker network create --driver=bridge --subnet=192.16.0.0/16 test_network
+```
+Build and run the conatiners
+'''shell
 docker-compose build
 docker-compose up
+'''
 
 # Publish data
 
