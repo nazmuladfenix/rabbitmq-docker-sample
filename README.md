@@ -21,7 +21,7 @@ docker-compose up
 Run the follwing command into curl to publish the data 
 
 ```shell
-curl -d '{"Name":"Nazmul", "Address":"Dhaka, Bangladesh"}' -H "Content-Type: application/json" -X POST http://localhost:8000/api/publication
+curl -H "Content-Type: application/json" -X POST -d '{"Name":"Nazmul","Address":"Dhaka Bangladesh"}' http://localhost:8000/api/publication
 ```
 # Get data
 Hit following url into web browser/curl
